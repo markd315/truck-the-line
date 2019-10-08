@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.IOException;
+import java.util.UUID;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
 
@@ -35,25 +36,25 @@ public class OrderApiController implements OrderApi {
     }
 
     public ResponseEntity<Void> deleteOrder(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted",
-            required = true) @PathVariable("orderId") Long orderId) {
+            required = true) @PathVariable("orderId") UUID orderId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> deleteOrderTragic(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted",
-            required = true) @PathVariable("orderId") Long orderId) {
+            required = true) @PathVariable("orderId") UUID orderId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Void> deleteOrderVictory(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted",
-            required = true) @PathVariable("orderId") Long orderId) {
+            required = true) @PathVariable("orderId") UUID orderId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Order> getOrderById(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",
-            required = true) @PathVariable("orderId") Long orderId) {
+            required = true) @PathVariable("orderId") UUID orderId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {

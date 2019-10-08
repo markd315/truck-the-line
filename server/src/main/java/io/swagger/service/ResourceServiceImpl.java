@@ -1,25 +1,26 @@
 package io.swagger.service;
 
-import io.swagger.model.Order;
-import io.swagger.repository.OrderRepository;
-import io.swagger.model.User;
-import io.swagger.repository.UserRepository;
-import io.swagger.model.Vendor;
-import io.swagger.repository.VendorRepository;
 import io.swagger.model.Food;
+import io.swagger.model.Order;
+import io.swagger.model.User;
+import io.swagger.model.Vendor;
 import io.swagger.repository.FoodRepository;
+import io.swagger.repository.OrderRepository;
+import io.swagger.repository.UserRepository;
+import io.swagger.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
     @Autowired
     public ResourceServiceImpl(
-      OrderRepository orderRepository, UserRepository userRepository, VendorRepository vendorRepository, FoodRepository foodRepository){
-            this.orderRepository = orderRepository;
+            OrderRepository orderRepository, UserRepository userRepository, VendorRepository vendorRepository, FoodRepository foodRepository) {
+        this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.vendorRepository = vendorRepository;
         this.foodRepository = foodRepository;
@@ -28,8 +29,8 @@ public class ResourceServiceImpl implements ResourceService {
     private OrderRepository orderRepository;
 
     @Override
-    public Order findOrderById(int id) throws DataAccessException {
-        Order order= orderRepository.findById(id);
+    public Order findOrderById(UUID id) throws DataAccessException {
+        Order order = orderRepository.findById(id);
         return order;
     }
 
@@ -39,8 +40,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public void saveOrder(Order order) throws DataAccessException {
-        orderRepository.save(order);
+    public Order saveOrder(Order order) throws DataAccessException {
+        return orderRepository.save(order);
     }
 
     @Override
@@ -48,11 +49,11 @@ public class ResourceServiceImpl implements ResourceService {
         orderRepository.delete(order);
     }
 
-private UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
-    public User findUserById(int id) throws DataAccessException {
-        User user= userRepository.findById(id);
+    public User findUserById(UUID id) throws DataAccessException {
+        User user = userRepository.findById(id);
         return user;
     }
 
@@ -62,8 +63,8 @@ private UserRepository userRepository;
     }
 
     @Override
-    public void saveUser(User user) throws DataAccessException {
-        userRepository.save(user);
+    public User saveUser(User user) throws DataAccessException {
+        return userRepository.save(user);
     }
 
     @Override
@@ -71,11 +72,11 @@ private UserRepository userRepository;
         userRepository.delete(user);
     }
 
-private VendorRepository vendorRepository;
+    private VendorRepository vendorRepository;
 
     @Override
-    public Vendor findVendorById(int id) throws DataAccessException {
-        Vendor vendor= vendorRepository.findById(id);
+    public Vendor findVendorById(UUID id) throws DataAccessException {
+        Vendor vendor = vendorRepository.findById(id);
         return vendor;
     }
 
@@ -85,8 +86,8 @@ private VendorRepository vendorRepository;
     }
 
     @Override
-    public void saveVendor(Vendor vendor) throws DataAccessException {
-        vendorRepository.save(vendor);
+    public Vendor saveVendor(Vendor vendor) throws DataAccessException {
+        return vendorRepository.save(vendor);
     }
 
     @Override
@@ -94,11 +95,11 @@ private VendorRepository vendorRepository;
         vendorRepository.delete(vendor);
     }
 
-private FoodRepository foodRepository;
+    private FoodRepository foodRepository;
 
     @Override
-    public Food findFoodById(int id) throws DataAccessException {
-        Food food= foodRepository.findById(id);
+    public Food findFoodById(UUID id) throws DataAccessException {
+        Food food = foodRepository.findById(id);
         return food;
     }
 
@@ -108,17 +109,14 @@ private FoodRepository foodRepository;
     }
 
     @Override
-    public void saveFood(Food food) throws DataAccessException {
-        foodRepository.save(food);
+    public Food saveFood(Food food) throws DataAccessException {
+        return foodRepository.save(food);
     }
 
     @Override
     public void deleteFood(Food food) throws DataAccessException {
         foodRepository.delete(food);
     }
-
-
-
 
 
 }

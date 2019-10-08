@@ -5,79 +5,80 @@
  */
 package io.swagger.api;
 
-import java.util.Map;
-import io.swagger.model.Order;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+import io.swagger.model.Vendor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.UUID;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
 
 @Api(value = "vendor", description = "the vendor API")
 public interface VendorApi {
 
-    @ApiOperation(value = "Create a new menu", nickname = "createMenu", notes = "", response = Order.class, authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Order.class),
-        @ApiResponse(code = 400, message = "Invalid Order") })
+    @ApiOperation(value = "Create a new menu", nickname = "createVendor", notes = "", response = Vendor.class, authorizations = {
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Vendor.class),
+            @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/vendor",
-        produces = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Order> createMenu(@ApiParam(value = "order placed for purchasing the pet" ,required=true )  @Valid @RequestBody Order body);
+            produces = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<Vendor> createVendor(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Vendor body);
 
 
     @ApiOperation(value = "Remove a vendor from the accessible list", nickname = "deleteVendor", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/vendor/{vendorId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("vendorId") Long vendorId);
+            produces = {"application/json"},
+            method = RequestMethod.DELETE)
+    ResponseEntity<Void> deleteVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId);
 
 
     @ApiOperation(value = "Edit a vendor from the accessible list", nickname = "editVendor", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/vendor/{vendorId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> editVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("vendorId") Long vendorId);
+            produces = {"application/json"},
+            method = RequestMethod.PUT)
+    ResponseEntity<Void> editVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body);
 
 
-    @ApiOperation(value = "Returns vendor inventories", nickname = "getAllInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Map.class, responseContainer = "Map") })
+    @ApiOperation(value = "Returns vendor inventories", nickname = "getAllInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Map.class, responseContainer = "Map")})
     @RequestMapping(value = "/vendor",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Map<String, Integer>> getAllInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("vendorId") Long vendorId);
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<ArrayList<Vendor>> getAllInventory();
 
 
-    @ApiOperation(value = "Returns vendor inventory", nickname = "getInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Map.class, responseContainer = "Map") })
+    @ApiOperation(value = "Returns vendor inventory", nickname = "getInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Map.class, responseContainer = "Map")})
     @RequestMapping(value = "/vendor/{vendorId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Map<String, Integer>> getInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("vendorId") Long vendorId);
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<Vendor> getInventory(@ApiParam(value = "ID of pet that needs to be fetched", required = true) @PathVariable("vendorId") UUID vendorId);
 
 }

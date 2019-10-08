@@ -5,79 +5,81 @@
  */
 package io.swagger.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import io.swagger.model.Order;
-import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.util.UUID;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
 
 @Api(value = "order", description = "the order API")
 public interface OrderApi {
 
-    @ApiOperation(value = "Delete purchase order by ID (customer)", nickname = "deleteOrder", notes = "Fails if the order has already been printed", tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied or order already printed"),
-        @ApiResponse(code = 404, message = "Order not found") })
+    @ApiOperation(value = "Delete purchase order by ID (customer)", nickname = "deleteOrder", notes = "Fails if the order has already been printed", tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied or order already printed"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/order/{orderId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrder(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("orderId") Long orderId);
+            produces = {"application/json"},
+            method = RequestMethod.DELETE)
+    ResponseEntity<Void> deleteOrder(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
 
 
     @ApiOperation(value = "Sends an apologetic email instead of a success one", nickname = "deleteOrderTragic", notes = "", authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/order/{orderId}/error",
-        produces = { "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrderTragic(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("orderId") Long orderId);
+            produces = {"application/json"},
+            method = RequestMethod.DELETE)
+    ResponseEntity<Void> deleteOrderTragic(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
 
 
     @ApiOperation(value = "Alerts a customer that their food is ready", nickname = "deleteOrderVictory", notes = "", authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/order/{orderId}/ready",
-        produces = { "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrderVictory(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("orderId") Long orderId);
+            produces = {"application/json"},
+            method = RequestMethod.DELETE)
+    ResponseEntity<Void> deleteOrderVictory(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
 
 
-    @ApiOperation(value = "Find purchase order by ID", nickname = "getOrderById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Order.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Order.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+    @ApiOperation(value = "Find purchase order by ID", nickname = "getOrderById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Order.class, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Order.class),
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     @RequestMapping(value = "/order/{orderId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Order> getOrderById(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("orderId") Long orderId);
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<Order> getOrderById(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched", required = true) @PathVariable("orderId") UUID orderId);
 
 
-    @ApiOperation(value = "Place an order for food from the menus", nickname = "placeOrder", notes = "", response = Order.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Order.class),
-        @ApiResponse(code = 400, message = "Invalid Order") })
+    @ApiOperation(value = "Place an order for food from the menus", nickname = "placeOrder", notes = "", response = Order.class, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Order.class),
+            @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/order",
-        produces = { "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet" ,required=true )  @Valid @RequestBody Order body);
+            produces = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Order body);
 
 }

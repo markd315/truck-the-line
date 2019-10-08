@@ -1,17 +1,16 @@
 package io.swagger.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.Food;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Vendor
@@ -19,9 +18,9 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
 
-public class Vendor   {
+public class Vendor {
   @JsonProperty("id")
-  private Long id = null;
+  private UUID id = null;
 
   @JsonProperty("donationPriority")
   private Long donationPriority = null;
@@ -35,11 +34,11 @@ public class Vendor   {
    */
   public enum StatusEnum {
     SHORT_WAIT("Short wait"),
-    
+
     BUSY("Busy"),
-    
+
     VERY_BUSY("Very Busy"),
-    
+
     INACTIVE("Inactive");
 
     private String value;
@@ -71,23 +70,24 @@ public class Vendor   {
   @JsonProperty("complete")
   private Boolean complete = false;
 
-  public Vendor id(Long id) {
+  public Vendor id(UUID id) {
     this.id = id;
     return this;
   }
 
   /**
    * Get id
+   *
    * @return id
-  **/
+   **/
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -98,8 +98,9 @@ public class Vendor   {
 
   /**
    * Get donationPriority
+   *
    * @return donationPriority
-  **/
+   **/
   @ApiModelProperty(value = "")
 
 
@@ -126,8 +127,9 @@ public class Vendor   {
 
   /**
    * Get menu
+   *
    * @return menu
-  **/
+   **/
   @ApiModelProperty(value = "")
 
   @Valid
@@ -147,8 +149,9 @@ public class Vendor   {
 
   /**
    * Vendor Status
+   *
    * @return status
-  **/
+   **/
   @ApiModelProperty(value = "Vendor Status")
 
 
@@ -167,8 +170,9 @@ public class Vendor   {
 
   /**
    * Get complete
+   *
    * @return complete
-  **/
+   **/
   @ApiModelProperty(value = "")
 
 
@@ -191,10 +195,10 @@ public class Vendor   {
     }
     Vendor vendor = (Vendor) o;
     return Objects.equals(this.id, vendor.id) &&
-        Objects.equals(this.donationPriority, vendor.donationPriority) &&
-        Objects.equals(this.menu, vendor.menu) &&
-        Objects.equals(this.status, vendor.status) &&
-        Objects.equals(this.complete, vendor.complete);
+            Objects.equals(this.donationPriority, vendor.donationPriority) &&
+            Objects.equals(this.menu, vendor.menu) &&
+            Objects.equals(this.status, vendor.status) &&
+            Objects.equals(this.complete, vendor.complete);
   }
 
   @Override
@@ -206,7 +210,7 @@ public class Vendor   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Vendor {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    donationPriority: ").append(toIndentedString(donationPriority)).append("\n");
     sb.append("    menu: ").append(toIndentedString(menu)).append("\n");

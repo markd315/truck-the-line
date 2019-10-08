@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.threeten.bp.OffsetDateTime;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -21,7 +23,7 @@ import javax.validation.constraints.*;
 
 public class Order   {
   @JsonProperty("id")
-  private Long id = null;
+  private UUID id = null;
 
   @JsonProperty("donationPriority")
   private Long donationPriority = null;
@@ -38,9 +40,9 @@ public class Order   {
    */
   public enum StatusEnum {
     SENDING_ORDER("Sending order"),
-    
+
     WAITING_FOR_TRUCK("Waiting for truck"),
-    
+
     READY_FOR_PICKUP("Ready for pickup");
 
     private String value;
@@ -72,7 +74,7 @@ public class Order   {
   @JsonProperty("complete")
   private Boolean complete = false;
 
-  public Order id(Long id) {
+  public Order id(UUID id) {
     this.id = id;
     return this;
   }
@@ -84,11 +86,11 @@ public class Order   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -228,7 +230,7 @@ public class Order   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Order {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    donationPriority: ").append(toIndentedString(donationPriority)).append("\n");
     sb.append("    payload: ").append(toIndentedString(payload)).append("\n");

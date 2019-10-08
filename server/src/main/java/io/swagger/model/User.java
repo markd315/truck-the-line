@@ -1,6 +1,8 @@
 package io.swagger.model;
 
 import java.util.Objects;
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
@@ -17,7 +19,7 @@ import javax.validation.constraints.*;
 
 public class User   {
   @JsonProperty("id")
-  private Long id = null;
+  private UUID id = null;
 
   @JsonProperty("firstName")
   private String firstName = null;
@@ -31,7 +33,7 @@ public class User   {
   @JsonProperty("userStatus")
   private Integer userStatus = null;
 
-  public User id(Long id) {
+  public User id(UUID id) {
     this.id = id;
     return this;
   }
@@ -43,11 +45,11 @@ public class User   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -159,7 +161,7 @@ public class User   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");

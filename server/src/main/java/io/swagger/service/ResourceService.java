@@ -5,20 +5,27 @@ import io.swagger.model.User;
 import io.swagger.model.Vendor;
 import io.swagger.model.Food;
 import java.util.Collection;
+import java.util.UUID;
 
 public interface ResourceService {
 
-    void saveOrder(Order order);
-    Order findOrderById(int Id);
+    Order saveOrder(Order order);
+    Order findOrderById(UUID id);
     void deleteOrder(Order order);
-    Collection<Order> findAllOrders();void saveUser(User user);
-    User findUserById(int Id);
+    Collection<Order> findAllOrders();
+
+    User saveUser(User user);
+    User findUserById(UUID id);
     void deleteUser(User user);
-    Collection<User> findAllUsers();void saveVendor(Vendor vendor);
-    Vendor findVendorById(int Id);
+    Collection<User> findAllUsers();
+
+    Vendor saveVendor(Vendor vendor);
+    Vendor findVendorById(UUID id);
     void deleteVendor(Vendor vendor);
-    Collection<Vendor> findAllVendors();void saveFood(Food food);
-    Food findFoodById(int Id);
+    Collection<Vendor> findAllVendors();
+
+    Food saveFood(Food food);
+    Food findFoodById(UUID id);
     void deleteFood(Food food);
     Collection<Food> findAllFoods();
 
