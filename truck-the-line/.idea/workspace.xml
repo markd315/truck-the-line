@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de1ef4c5-e650-4beb-96af-b0e8ad0de7f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/OrderApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/OrderApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/OrderApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/OrderApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Vendor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/model/Vendor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/FoodRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/FoodRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/VendorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/repository/VendorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/service/ResourceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/service/ResourceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/io/swagger/service/ResourceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/io/swagger/service/ResourceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../server/target/" />
@@ -30,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApiController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
+            <state relative-caret-position="188">
+              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -169,7 +157,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570548266911" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570548803569" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -202,12 +190,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1570544019052</updated>
-      <workItem from="1570544020472" duration="3436000" />
+      <workItem from="1570544020472" duration="3838000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3436000" />
+    <option name="totallyTimeSpent" value="3838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -220,7 +208,7 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Learn" />
       <window_info id="Web" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
@@ -233,7 +221,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,8 +385,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../server/src/main/java/io/swagger/api/VendorApiController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
+        <state relative-caret-position="188">
+          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
         </state>
       </provider>
     </entry>

@@ -61,7 +61,7 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor/{vendorId}",
             produces = {"application/json"},
             method = RequestMethod.PUT)
-    ResponseEntity<Void> editVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body);
+    ResponseEntity<Vendor> editVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body);
 
 
     @ApiOperation(value = "Returns vendor inventories", nickname = "getAllInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags = {})

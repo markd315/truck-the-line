@@ -51,16 +51,21 @@ public class VendorApiController implements VendorApi {
         return new ResponseEntity<Vendor>(response, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> deleteVendor(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted",
+    public ResponseEntity<Void> deleteVendor(@ApiParam(value = "ID of the order that needs to be deleted",
             required = true) @PathVariable("vendorId") UUID vendorId) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        Vendor forId = new Vendor();
+        forId.setId(vendorId);
+        service.deleteVendor(forId);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
-    public ResponseEntity<Void> editVendor(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted",
+    public ResponseEntity<Vendor> editVendor(@ApiParam(value = "ID of the order that needs to be changed",
             required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        body.setId(vendorId);
+        Vendor response = service.saveVendor(body);
+        return new ResponseEntity<Vendor>(response, HttpStatus.OK);
     }
 
     public ResponseEntity<ArrayList<Vendor>> getAllInventory() {
