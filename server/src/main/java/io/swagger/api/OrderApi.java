@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import io.swagger.model.Order;
+import io.swagger.model.response.OrderDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -95,7 +96,7 @@ public interface OrderApi {
     @RequestMapping(value = "/order",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Order body,
+    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody OrderDTO body,
                                      @ApiParam(value = "Authorization code from email",
                                              required = true) @RequestHeader String username,
                                      @ApiParam(value = "Authorization code from email",

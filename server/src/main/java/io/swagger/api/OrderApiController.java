@@ -2,8 +2,11 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.model.Food;
 import io.swagger.model.Order;
 import io.swagger.model.User;
+import io.swagger.model.response.BaseOrder;
+import io.swagger.model.response.OrderDTO;
 import io.swagger.service.ResourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
@@ -88,7 +92,7 @@ public class OrderApiController implements OrderApi {
     }
 
     public ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet",
-            required = true) @Valid @RequestBody Order body,
+            required = true) @Valid @RequestBody OrderDTO body,
                                             @ApiParam(value = "Authorization code from email",
                                                     required = true) @RequestHeader String username,
                                             @ApiParam(value = "Authorization code from email",
@@ -97,11 +101,19 @@ public class OrderApiController implements OrderApi {
             return new ResponseEntity<Order>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            return new ResponseEntity<Order>(body, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Order>(HttpStatus.BAD_REQUEST);
         }
         body.setPlacedBy(username);
         body.setId(UUID.randomUUID());
-        Order response = service.saveOrder(body);
+        BaseOrder base = body;
+        Order order = new Order(base);
+        ArrayList<Food> foods = new ArrayList<Food>();
+        for (String s : body.getPayload()) {
+            Food food = service.findFoodById(UUID.fromString(s));
+            foods.add(food);
+        }
+        order.setPayload(foods);
+        Order response = service.saveOrder(order);
         return new ResponseEntity<Order>(response, HttpStatus.CREATED);
     }
 
@@ -124,7 +136,7 @@ public class OrderApiController implements OrderApi {
         return false;
     }
 
-    private void applyVendors() {
+    private void applyFoods() {
 
     }
 
