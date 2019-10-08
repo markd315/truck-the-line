@@ -1,0 +1,15 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        Food Truck Menu
+    </div>
+    <app-component>
+    <div class="panel-body">
+        <strong *ngIf="vendors.length == 0">Loading...</strong>
+        <ul *ngIf="vendors.length > 0" class="nav nav-pills nav-stacked">
+            <li *ngFor="let vendor of vendors" routerLinkActive="active">
+                <a [routerLink]="'vendor/' + vendor.id">{{vendor.name}}</a>
+            </li>
+        </ul>
+    </div>
+  </app-component>
+</div>

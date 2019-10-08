@@ -15,7 +15,7 @@ import * as models from '../model/models';
 /* tslint:disable:no-unused-variable member-ordering */
 
 export class VendorApiControllerApi {
-    protected basePath = 'https://localhost:8080/truck';
+    protected basePath = 'http://localhost:8080/truck';
     public defaultHeaders : any = {};
 
     static $inject: string[] = ['$http', '$httpParamSerializer', 'basePath'];
