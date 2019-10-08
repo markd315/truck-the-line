@@ -15,6 +15,7 @@ import io.swagger.model.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,7 +36,13 @@ public interface OrderApi {
     @RequestMapping(value = "/order/{orderId}",
             produces = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrder(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
+    ResponseEntity<Void> deleteOrder(
+            @ApiParam(value = "ID of the order that needs to be deleted", required = true)
+            @PathVariable("orderId") UUID orderId,
+            @ApiParam(value = "Authorization code from email",
+                    required = true) @RequestHeader String username,
+            @ApiParam(value = "Authorization code from email",
+                    required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Sends an apologetic email instead of a success one", nickname = "deleteOrderTragic", notes = "", authorizations = {
@@ -47,7 +54,11 @@ public interface OrderApi {
     @RequestMapping(value = "/order/{orderId}/error",
             produces = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrderTragic(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
+    ResponseEntity<Void> deleteOrderTragic(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId,
+                                           @ApiParam(value = "Authorization code from email",
+                                                   required = true) @RequestHeader String username,
+                                           @ApiParam(value = "Authorization code from email",
+                                                   required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Alerts a customer that their food is ready", nickname = "deleteOrderVictory", notes = "", authorizations = {
@@ -59,7 +70,11 @@ public interface OrderApi {
     @RequestMapping(value = "/order/{orderId}/ready",
             produces = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteOrderVictory(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId);
+    ResponseEntity<Void> deleteOrderVictory(@Min(1L) @ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("orderId") UUID orderId,
+                                            @ApiParam(value = "Authorization code from email",
+                                                    required = true) @RequestHeader String username,
+                                            @ApiParam(value = "Authorization code from email",
+                                                    required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Find purchase order by ID", nickname = "getOrderById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Order.class, tags = {})
@@ -80,6 +95,10 @@ public interface OrderApi {
     @RequestMapping(value = "/order",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Order body);
+    ResponseEntity<Order> placeOrder(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Order body,
+                                     @ApiParam(value = "Authorization code from email",
+                                             required = true) @RequestHeader String username,
+                                     @ApiParam(value = "Authorization code from email",
+                                             required = true) @RequestHeader String minAuth);
 
 }

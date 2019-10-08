@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
@@ -51,11 +53,13 @@ public class PrintApiController implements PrintApi {
                 printingOrders.add(o);
             }
         }
+        printingOrders.sort(Comparator.comparing(Order::getDonationPriority));
+        Collections.reverse(printingOrders);
         return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
     }
 
     public ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
-                                             @RequestParam(value = "vendor", required = false) String vendorId) {
+                                              @RequestParam(value = "vendor", required = false) String vendorId) {
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
@@ -66,6 +70,8 @@ public class PrintApiController implements PrintApi {
                 printingOrders.add(o);
             }
         }
+        printingOrders.sort(Comparator.comparing(Order::getDonationPriority));
+        Collections.reverse(printingOrders);
         return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
     }
 

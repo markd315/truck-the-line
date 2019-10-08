@@ -52,8 +52,8 @@ public class ResourceServiceImpl implements ResourceService {
     private UserRepository userRepository;
 
     @Override
-    public User findUserById(UUID id) throws DataAccessException {
-        User user = userRepository.findById(id);
+    public User findUserById(String email) throws DataAccessException {
+        User user = userRepository.findByEmail(email);
         return user;
     }
 

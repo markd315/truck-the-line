@@ -23,6 +23,9 @@ public class Order {
     @JsonProperty("id")
     private UUID id = null;
 
+    @JsonProperty("placedBy")
+    private String placedBy = null;
+
     @JsonProperty("donationPriority")
     private Long donationPriority = null;
 
@@ -165,6 +168,14 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public String getPlacedBy() {
+        return placedBy;
+    }
+
+    public void setPlacedBy(String placedBy) {
+        this.placedBy = placedBy;
+    }
+
     public Order status(StatusEnum status) {
         this.status = status;
         return this;
@@ -222,12 +233,13 @@ public class Order {
                 Objects.equals(this.payload, order.payload) &&
                 Objects.equals(this.orderDate, order.orderDate) &&
                 Objects.equals(this.status, order.status) &&
+                Objects.equals(this.placedBy, order.placedBy) &&
                 Objects.equals(this.complete, order.complete);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, donationPriority, payload, orderDate, status, complete);
+        return Objects.hash(id, donationPriority, payload, orderDate, status, complete, placedBy);
     }
 
     @Override
@@ -240,6 +252,7 @@ public class Order {
         sb.append("    payload: ").append(toIndentedString(payload)).append("\n");
         sb.append("    orderDate: ").append(toIndentedString(orderDate)).append("\n");
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    placedBy: ").append(toIndentedString(placedBy)).append("\n");
         sb.append("    complete: ").append(toIndentedString(complete)).append("\n");
         sb.append("}");
         return sb.toString();

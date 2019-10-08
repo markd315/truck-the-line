@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface UserRepository extends MongoRepository<User, Integer> {
     List<User> findAll() throws DataAccessException;
 
-    User findById(UUID id) throws DataAccessException;
+    User findByEmail(String email) throws DataAccessException;
 
     User save(User user) throws DataAccessException;
 

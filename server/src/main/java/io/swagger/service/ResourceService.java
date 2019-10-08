@@ -15,7 +15,7 @@ public interface ResourceService {
     Collection<Order> findAllOrders();
 
     User saveUser(User user);
-    User findUserById(UUID id);
+    User findUserById(String email);
     void deleteUser(User user);
     Collection<User> findAllUsers();
 
