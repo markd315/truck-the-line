@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.model.Food;
 import io.swagger.model.Vendor;
 import io.swagger.service.ResourceService;
 import org.slf4j.Logger;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -47,6 +46,9 @@ public class VendorApiController implements VendorApi {
             return new ResponseEntity<Vendor>(body, HttpStatus.BAD_REQUEST);
         }
         body.setId(UUID.randomUUID());
+        for (Food food : body.getMenu()) {
+            food.setId(UUID.randomUUID());
+        }
         Vendor response = service.saveVendor(body);
         return new ResponseEntity<Vendor>(response, HttpStatus.CREATED);
     }
@@ -78,7 +80,7 @@ public class VendorApiController implements VendorApi {
         return new ResponseEntity<ArrayList<Vendor>>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<Vendor> getInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",
+    public ResponseEntity<Vendor> getInventory(@ApiParam(value = "ID of pet that needs to be fetched",
             required = true) @PathVariable("vendorId") UUID vendorId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {

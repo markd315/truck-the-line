@@ -87,6 +87,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public Vendor saveVendor(Vendor vendor) throws DataAccessException {
+        for(Food food : vendor.getMenu()){
+            saveFood(food);
+        }
         return vendorRepository.save(vendor);
     }
 
