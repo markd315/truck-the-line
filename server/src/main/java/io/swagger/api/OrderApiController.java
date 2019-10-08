@@ -82,5 +82,8 @@ public class OrderApiController implements OrderApi {
         return new ResponseEntity<Order>(response, HttpStatus.CREATED);
     }
 
+    private void applyVendors() {
+
+    }
 
 }
