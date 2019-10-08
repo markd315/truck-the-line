@@ -38,7 +38,8 @@ public class VendorApiController implements VendorApi {
         this.request = request;
     }
 
-    public ResponseEntity<Order> createMenu(@ApiParam(value = "order placed for purchasing the pet" ,required=true )  @Valid @RequestBody Order body) {
+    public ResponseEntity<Order> createMenu(@ApiParam(value = "order placed for purchasing the pet" ,
+            required=true )  @Valid @RequestBody Order body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -52,17 +53,20 @@ public class VendorApiController implements VendorApi {
         return new ResponseEntity<Order>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("vendorId") Long vendorId) {
+    public ResponseEntity<Void> deleteVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",
+            required=true) @PathVariable("vendorId") Long vendorId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> editVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",required=true) @PathVariable("vendorId") Long vendorId) {
+    public ResponseEntity<Void> editVendor(@Min(1L)@ApiParam(value = "ID of the order that needs to be deleted",
+            required=true) @PathVariable("vendorId") Long vendorId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Map<String, Integer>> getAllInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("vendorId") Long vendorId) {
+    public ResponseEntity<Map<String, Integer>> getAllInventory(@Min(1L) @Max(10L)
+           @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("vendorId") Long vendorId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -76,7 +80,8 @@ public class VendorApiController implements VendorApi {
         return new ResponseEntity<Map<String, Integer>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Map<String, Integer>> getInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",required=true) @PathVariable("vendorId") Long vendorId) {
+    public ResponseEntity<Map<String, Integer>> getInventory(@Min(1L) @Max(10L) @ApiParam(value = "ID of pet that needs to be fetched",
+            required=true) @PathVariable("vendorId") Long vendorId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {

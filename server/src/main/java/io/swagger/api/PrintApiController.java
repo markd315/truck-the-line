@@ -37,7 +37,8 @@ public class PrintApiController implements PrintApi {
         this.request = request;
     }
 
-    public ResponseEntity<Order> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor) {
+    public ResponseEntity<Order> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
+                                       @RequestParam(value = "vendor", required = false) String vendor) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
