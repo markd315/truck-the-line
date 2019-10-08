@@ -56,7 +56,7 @@ public class OrderApiController implements OrderApi {
     public ResponseEntity<Void> deleteOrderVictory(@ApiParam(value = "ID of the order that needs to be deleted",
             required = true) @PathVariable("orderId") UUID orderId) {
         String accept = request.getHeader("Accept");
-        //
+        Mailer.sendOrderReady("mark_davis@ultimatesoftware.com");
         return deleteOrder(orderId);
     }
 
