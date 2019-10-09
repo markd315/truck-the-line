@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b039ae4-b3ab-456c-ae4d-83d754019dc9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/../postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,23 +42,32 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="107" column="13" lean-forward="true" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
-              <folding>
-                <element signature="e#4722#4723#0" expanded="true" />
-                <element signature="e#4770#4771#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="35" column="57" lean-forward="true" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
+              <folding>
+                <element signature="e#6044#6045#0" expanded="true" />
+                <element signature="e#6131#6132#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+            <state relative-caret-position="289">
+              <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
               <folding>
                 <element signature="e#864#865#0" expanded="true" />
                 <element signature="e#892#893#0" expanded="true" />
@@ -129,14 +140,14 @@
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/model/Order.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/configuration/Helper.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/OrderApiController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/UserApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/VendorApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/UserApiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/VendorApiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/model/Vendor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java" />
       </list>
     </option>
   </component>
@@ -256,7 +267,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570637780933" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570638929001" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -387,7 +398,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16244000" />
+    <option name="totallyTimeSpent" value="17337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -400,7 +411,7 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Learn" />
       <window_info id="Web" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
@@ -413,7 +424,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -620,13 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="73" column="101" selection-start-line="73" selection-start-column="101" selection-end-line="73" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/VendorApi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -704,24 +708,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="107" column="13" lean-forward="true" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
           <folding>
-            <element signature="e#4722#4723#0" expanded="true" />
-            <element signature="e#4770#4771#0" expanded="true" />
+            <element signature="e#864#865#0" expanded="true" />
+            <element signature="e#892#893#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/model/Food.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state relative-caret-position="255">
+          <caret line="35" column="57" lean-forward="true" selection-start-line="35" selection-start-column="57" selection-end-line="35" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/swagger/api/PrintApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
           <folding>
-            <element signature="e#864#865#0" expanded="true" />
-            <element signature="e#892#893#0" expanded="true" />
+            <element signature="e#6044#6045#0" expanded="true" />
+            <element signature="e#6131#6132#0" expanded="true" />
           </folding>
         </state>
       </provider>

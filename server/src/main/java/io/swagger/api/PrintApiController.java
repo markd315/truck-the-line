@@ -56,7 +56,7 @@ public class PrintApiController implements PrintApi {
                                                      required = true) @RequestHeader String minAuth) {
         if (!helper.adminOnly(minAuth))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        String accept = request.getHeader("Accept");
+        String accept = request.getHeader("Return");
         Collection<Order> list = service.findAllOrders();
 
         list = vendorFilter(list, vendorId);
@@ -81,7 +81,7 @@ public class PrintApiController implements PrintApi {
                                                       required = true) @RequestHeader String minAuth) {
         if (!helper.adminOnly(minAuth))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        String accept = request.getHeader("Accept");
+        String accept = request.getHeader("Return");
         Collection<Order> list = service.findAllOrders();
 
         list = vendorFilter(list, vendorId);
@@ -96,45 +96,12 @@ public class PrintApiController implements PrintApi {
         return htmlOrJson(accept, printingOrders);
     }
 
-    private ResponseEntity<List<Order>> htmlOrJson(String accept, List<Order> printingOrders) {
-
-        if (accept.equalsIgnoreCase("html")) {
-            List<Food> foods = new ArrayList<>();
-            for (Order o : printingOrders) {
-                for(Food f : o.getPayload()){
-                    f.setOrderId(o.getId());
-                }
-                foods.addAll(o.getPayload());
-            }
-            Collections.sort(foods, new Comparator<Food>() {
-                @Override
-                public int compare(Food o1, Food o2) {
-                    return o1.getVendor().compareTo(o2.getVendor());
-                }
-            });
-            String html = "";
-            UUID latestVendor = UUID.randomUUID();
-            for (Food f : foods) {
-                Vendor vendor = service.findVendorById(f.getVendor());
-                if (!f.getVendor().equals(latestVendor)) {
-                    html += "<h3>" + vendor.getName() + "</h3>\n";
-                }
-                html+="<p>"+f.getName() + " " + f.getOrderId() + "</p>\n";
-            }
-            Order o = new Order();
-            o.setPlacedBy(html);
-            return new ResponseEntity<List<Order>>(Collections.singletonList(o), HttpStatus.OK);
-        }
-        return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
-    }
-
     public ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
                                                     @RequestParam(value = "vendor", required = false) String vendorId,
                                                     @ApiParam(value = "Authorization code from email",
                                                             required = true) @RequestHeader String username,
                                                     @ApiParam(value = "Authorization code from email",
                                                             required = true) @RequestHeader String minAuth) {
-        String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
         list = vendorFilter(list, vendorId);
@@ -146,7 +113,39 @@ public class PrintApiController implements PrintApi {
         }
         printingOrders.sort(Comparator.comparing(Order::getDonationPriority));
         Collections.reverse(printingOrders);
-        return htmlOrJson(accept, printingOrders);
+        return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
+    }
+
+    private ResponseEntity<List<Order>> htmlOrJson(String accept, List<Order> printingOrders) {
+        if (accept != null && accept.equalsIgnoreCase("text/html")) {
+            List<Food> foods = new ArrayList<>();
+            for (Order o : printingOrders) {
+                for (Food f : o.getPayload()) {
+                    f.setOrderId(o.getId());
+                }
+                foods.addAll(o.getPayload());
+            }
+            Collections.sort(foods, new Comparator<Food>() {
+                @Override
+                public int compare(Food o1, Food o2) {
+                    return o1.getVendor().compareTo(o2.getVendor());
+                }
+            });
+            String html = "";
+            UUID latestVendor = null;
+            for (Food f : foods) {
+                Vendor vendor = service.findVendorById(f.getVendor());
+                if (!f.getVendor().equals(latestVendor)) {
+                    latestVendor = f.getVendor();
+                    html += "<h3>" + vendor.getName() + "</h3>";
+                }
+                html += "<p>" + f.getName() + " " + f.getOrderId() + "</p>";
+            }
+            Order o = new Order();
+            o.setPlacedBy(html);
+            return new ResponseEntity<List<Order>>(Collections.singletonList(o), HttpStatus.OK);
+        }
+        return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
     }
 
     private Collection<Order> vendorFilter(Collection<Order> list, String vendorId) {

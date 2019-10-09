@@ -33,11 +33,11 @@ public interface PrintApi {
             @ApiResponse(code = 200, message = "successful operation", response = Order.class),
             @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/print",
-            produces = {"application/json"},
+            produces = {"application/json", "text/html"},
             method = RequestMethod.DELETE)
     ResponseEntity<List<Order>> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
-    @ApiParam(value = "Authorization code from email",
-            required = true) @RequestHeader String username,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String username,
                                       @ApiParam(value = "Authorization code from email",
                                               required = true) @RequestHeader String minAuth);
 
@@ -49,7 +49,7 @@ public interface PrintApi {
             @ApiResponse(code = 200, message = "successful operation", response = Order.class),
             @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/print",
-            produces = {"application/json"},
+            produces = {"application/json", "text/html"},
             method = RequestMethod.GET)
     ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
                                        @ApiParam(value = "Authorization code from email",
@@ -65,7 +65,7 @@ public interface PrintApi {
             @ApiResponse(code = 200, message = "successful operation", response = Order.class),
             @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/print/truck",
-            produces = {"application/json"},
+            produces = {"application/json", "text/html"},
             method = RequestMethod.GET)
     ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
                                              @ApiParam(value = "Authorization code from email",
