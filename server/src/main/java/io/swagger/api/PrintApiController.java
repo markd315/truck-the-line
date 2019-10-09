@@ -75,4 +75,21 @@ public class PrintApiController implements PrintApi {
         return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
     }
 
+    public ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
+                                                    @RequestParam(value = "vendor", required = false) String vendorId) {
+        String accept = request.getHeader("Accept");
+        Collection<Order> list = service.findAllOrders();
+
+        //TODO filter by vendor
+        List<Order> printingOrders = new ArrayList<>();
+        for (Order o : list) {
+            if (o.getStatus().equals(Order.StatusEnum.WAITING_FOR_TRUCK)) {
+                printingOrders.add(o);
+            }
+        }
+        printingOrders.sort(Comparator.comparing(Order::getDonationPriority));
+        Collections.reverse(printingOrders);
+        return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
+    }
+
 }

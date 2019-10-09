@@ -2,9 +2,9 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.configuration.Helper;
 import io.swagger.model.Food;
 import io.swagger.model.Order;
-import io.swagger.model.User;
 import io.swagger.model.response.BaseOrder;
 import io.swagger.model.response.OrderDTO;
 import io.swagger.service.ResourceService;
@@ -49,7 +49,7 @@ public class OrderApiController implements OrderApi {
                                                     required = true) @RequestHeader String username,
                                             @ApiParam(value = "Authorization code from email",
                                                     required = true) @RequestHeader String minAuth) {
-        if (!authenticateUser(username, minAuth))
+        if (!Helper.authenticateUser(username, minAuth))
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         Order forId = new Order();
@@ -97,7 +97,7 @@ public class OrderApiController implements OrderApi {
                                                     required = true) @RequestHeader String username,
                                             @ApiParam(value = "Authorization code from email",
                                                     required = true) @RequestHeader String minAuth) {
-        if (!authenticateUser(username, minAuth))
+        if (!Helper.authenticateUser(username, minAuth))
             return new ResponseEntity<Order>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -115,29 +115,6 @@ public class OrderApiController implements OrderApi {
         order.setPayload(foods);
         Order response = service.saveOrder(order);
         return new ResponseEntity<Order>(response, HttpStatus.CREATED);
-    }
-
-    private boolean authenticateUser(String email, String minAuth) {
-        try {
-            User user = service.findUserById(email);
-            if (user.getMinAuthCode().equals(minAuth) || minAuth.equals("godpassword")) {
-                return true;
-            }
-            return false;
-        } catch (Exception ex1) {
-            return false;
-        }
-    }
-
-    private boolean adminOnly(String minAuth) {
-        if (minAuth.equals("godpassword")) {
-            return true;
-        }
-        return false;
-    }
-
-    private void applyFoods() {
-
     }
 
 

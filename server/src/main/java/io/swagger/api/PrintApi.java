@@ -5,8 +5,13 @@
  */
 package io.swagger.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import io.swagger.model.Order;
-import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,32 +19,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-10-08T13:59:51.930Z")
 
 @Api(value = "print", description = "the print API")
 public interface PrintApi {
 
     @ApiOperation(value = "Transitions from app to real-life.", nickname = "print", notes = "Moves all Waiting For Print orders to Waiting for Truck and returns a printable list of these, partitioned by vendor.", response = Order.class, authorizations = {
-        @Authorization(value = "api_key")
-    }, tags={  })
+            @Authorization(value = "api_key")
+    }, tags = {})
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "successful operation", response = Order.class),
-        @ApiResponse(code = 400, message = "Invalid Order") })
+            @ApiResponse(code = 200, message = "successful operation", response = Order.class),
+            @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/print",
-        produces = { "application/json" },
-        method = RequestMethod.DELETE)
+            produces = {"application/json"},
+            method = RequestMethod.DELETE)
     ResponseEntity<List<Order>> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
 
 
     @ApiOperation(value = "Transitions from app to real-life.", nickname = "print", notes = "Moves all Waiting For Print orders to Waiting for Truck and returns a printable list of these, partitioned by vendor.", response = Order.class, authorizations = {
             @Authorization(value = "api_key")
-    }, tags={  })
+    }, tags = {})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = Order.class),
-            @ApiResponse(code = 400, message = "Invalid Order") })
+            @ApiResponse(code = 400, message = "Invalid Order")})
     @RequestMapping(value = "/print",
-            produces = { "application/json" },
+            produces = {"application/json"},
             method = RequestMethod.GET)
     ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
+
+
+    @ApiOperation(value = "Transitions from app to real-life.", nickname = "print", notes = "Gets all orders Waiting for Truck", response = Order.class, authorizations = {
+            @Authorization(value = "api_key")
+    }, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Order.class),
+            @ApiResponse(code = 400, message = "Invalid Order")})
+    @RequestMapping(value = "/print/truck",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
 
 }
