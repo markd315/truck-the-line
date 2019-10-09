@@ -26,7 +26,6 @@ public class User {
     @JsonProperty("userStatus")
     private Integer userStatus = null;
 
-
     /**
      * Get id
      *

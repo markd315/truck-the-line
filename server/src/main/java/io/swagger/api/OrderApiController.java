@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.configuration.Helper;
 import io.swagger.model.Food;
 import io.swagger.model.Order;
+import io.swagger.model.User;
 import io.swagger.model.response.BaseOrder;
 import io.swagger.model.response.OrderDTO;
 import io.swagger.service.ResourceService;
@@ -68,7 +69,7 @@ public class OrderApiController implements OrderApi {
                                                   @ApiParam(value = "Authorization code from email",
                                                           required = true) @RequestHeader String minAuth) {
         String accept = request.getHeader("Accept");
-        //
+        Mailer.sendOrderFail("mark_davis@ultimatesoftware.com");
         return deleteOrder(orderId, username, minAuth);
     }
 
@@ -102,11 +103,17 @@ public class OrderApiController implements OrderApi {
                                                     required = true) @RequestHeader String minAuth) {
         if (!helper.authenticateUser(username, minAuth))
             return new ResponseEntity<Order>(HttpStatus.UNAUTHORIZED);
+
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             return new ResponseEntity<Order>(HttpStatus.BAD_REQUEST);
         }
         body.setPlacedBy(username);
+        User user = service.findUserById(username);
+        body.setDonationPriority(Long.valueOf(user.getUserStatus()));
+        if (body.getDonationPriority() < 0) {
+            return new ResponseEntity<Order>(HttpStatus.FORBIDDEN);
+        }
         body.setId(UUID.randomUUID());
         BaseOrder base = body;
         Order order = new Order(base);

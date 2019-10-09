@@ -15,7 +15,7 @@ public class Mailer {
     }
 
     public static void sendOrderFail(String toEmail) {
-        send(toEmail, "Something went wrong with your food trucks order", "It has been deleted. Sorry :(");
+        send(toEmail, "Something went wrong with your food trucks order", "It has been deleted. Try resubmitting, sorry :(");
     }
 
     public static void send(String to, String sub, String msg) {
