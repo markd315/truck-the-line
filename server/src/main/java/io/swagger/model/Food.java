@@ -29,7 +29,7 @@ public class Food {
     @JsonProperty("vendor")
     private UUID vendor = null;
 
-
+    @JsonProperty("orderId")
     private UUID orderId;
 
     public void setOrderId(UUID id) {
