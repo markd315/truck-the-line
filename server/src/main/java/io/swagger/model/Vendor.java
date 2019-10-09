@@ -152,7 +152,7 @@ public class Vendor {
     @ApiModelProperty(value = "")
 
 
-    public String isComplete() {
+    public String getName() {
         return name;
     }
 

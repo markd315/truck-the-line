@@ -29,6 +29,17 @@ public class Food {
     @JsonProperty("vendor")
     private UUID vendor = null;
 
+
+    private UUID orderId;
+
+    public void setOrderId(UUID id) {
+        orderId = id;
+    }
+
+    public String getOrderId() {
+        return orderId.toString();
+    }
+
     /**
      * pet status in the store
      */
