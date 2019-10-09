@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import io.swagger.model.Order;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,11 @@ public interface PrintApi {
     @RequestMapping(value = "/print",
             produces = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<List<Order>> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
+    ResponseEntity<List<Order>> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
+    @ApiParam(value = "Authorization code from email",
+            required = true) @RequestHeader String username,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Transitions from app to real-life.", nickname = "print", notes = "Moves all Waiting For Print orders to Waiting for Truck and returns a printable list of these, partitioned by vendor.", response = Order.class, authorizations = {
@@ -46,7 +51,11 @@ public interface PrintApi {
     @RequestMapping(value = "/print",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
+    ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
+                                       @ApiParam(value = "Authorization code from email",
+                                               required = true) @RequestHeader String username,
+                                       @ApiParam(value = "Authorization code from email",
+                                               required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Transitions from app to real-life.", nickname = "print", notes = "Gets all orders Waiting for Truck", response = Order.class, authorizations = {
@@ -58,6 +67,10 @@ public interface PrintApi {
     @RequestMapping(value = "/print/truck",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor);
+    ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid @RequestParam(value = "vendor", required = false) String vendor,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String username,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String minAuth);
 
 }

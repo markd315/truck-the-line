@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.configuration.Helper;
 import io.swagger.model.Food;
 import io.swagger.model.Vendor;
 import io.swagger.service.ResourceService;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,6 +29,9 @@ public class VendorApiController implements VendorApi {
     @Autowired
     ResourceService service;
 
+    @Autowired
+    Helper helper;
+
     private static final Logger log = LoggerFactory.getLogger(VendorApiController.class);
 
     private final ObjectMapper objectMapper;
@@ -40,7 +45,13 @@ public class VendorApiController implements VendorApi {
     }
 
     public ResponseEntity<Vendor> createVendor(@ApiParam(value = "order placed for purchasing the pet",
-            required = true) @Valid @RequestBody Vendor body) {
+            required = true) @Valid @RequestBody Vendor body,
+                                               @ApiParam(value = "Authorization code from email",
+                                                       required = true) @RequestHeader String username,
+                                               @ApiParam(value = "Authorization code from email",
+                                                       required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             return new ResponseEntity<Vendor>(body, HttpStatus.BAD_REQUEST);
@@ -56,7 +67,13 @@ public class VendorApiController implements VendorApi {
     }
 
     public ResponseEntity<Void> deleteVendor(@ApiParam(value = "ID of the order that needs to be deleted",
-            required = true) @PathVariable("vendorId") UUID vendorId) {
+            required = true) @PathVariable("vendorId") UUID vendorId,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String username,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         Vendor forId = new Vendor();
         forId.setId(vendorId);
@@ -65,14 +82,23 @@ public class VendorApiController implements VendorApi {
     }
 
     public ResponseEntity<Vendor> editVendor(@ApiParam(value = "ID of the order that needs to be changed",
-            required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body) {
+            required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String username,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         body.setId(vendorId);
         Vendor response = service.saveVendor(body);
         return new ResponseEntity<Vendor>(response, HttpStatus.OK);
     }
 
-    public ResponseEntity<ArrayList<Vendor>> getAllInventory() {
+    public ResponseEntity<ArrayList<Vendor>> getAllInventory(@ApiParam(value = "Authorization code from email",
+            required = true) @RequestHeader String username,
+                                                             @ApiParam(value = "Authorization code from email",
+                                                                     required = true) @RequestHeader String minAuth) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             return new ResponseEntity<ArrayList<Vendor>>(new ArrayList<Vendor>(), HttpStatus.BAD_REQUEST);
@@ -83,7 +109,11 @@ public class VendorApiController implements VendorApi {
     }
 
     public ResponseEntity<Vendor> getInventory(@ApiParam(value = "ID of pet that needs to be fetched",
-            required = true) @PathVariable("vendorId") UUID vendorId) {
+            required = true) @PathVariable("vendorId") UUID vendorId,
+                                               @ApiParam(value = "Authorization code from email",
+                                                       required = true) @RequestHeader String username,
+                                               @ApiParam(value = "Authorization code from email",
+                                                       required = true) @RequestHeader String minAuth) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             return new ResponseEntity<Vendor>(new Vendor(), HttpStatus.BAD_REQUEST);

@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.configuration.Helper;
 import io.swagger.model.Food;
 import io.swagger.model.Order;
 import io.swagger.service.ResourceService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,10 @@ public class PrintApiController implements PrintApi {
 
     @Autowired
     private ResourceService service;
+
+    @Autowired
+    private Helper helper;
+
     private static final Logger log = LoggerFactory.getLogger(PrintApiController.class);
 
     private final ObjectMapper objectMapper;
@@ -41,7 +47,13 @@ public class PrintApiController implements PrintApi {
     }
 
     public ResponseEntity<List<Order>> print(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
-                                             @RequestParam(value = "vendor", required = false) String vendorId) {
+                                             @RequestParam(value = "vendor", required = false) String vendorId,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String username,
+                                             @ApiParam(value = "Authorization code from email",
+                                                     required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
@@ -60,7 +72,13 @@ public class PrintApiController implements PrintApi {
     }
 
     public ResponseEntity<List<Order>> dryrun(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
-                                              @RequestParam(value = "vendor", required = false) String vendorId) {
+                                              @RequestParam(value = "vendor", required = false) String vendorId,
+                                              @ApiParam(value = "Authorization code from email",
+                                                      required = true) @RequestHeader String username,
+                                              @ApiParam(value = "Authorization code from email",
+                                                      required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
@@ -77,7 +95,11 @@ public class PrintApiController implements PrintApi {
     }
 
     public ResponseEntity<List<Order>> truckWaiting(@ApiParam(value = "Filter the printjob to only a certain vendor") @Valid
-                                                    @RequestParam(value = "vendor", required = false) String vendorId) {
+                                                    @RequestParam(value = "vendor", required = false) String vendorId,
+                                                    @ApiParam(value = "Authorization code from email",
+                                                            required = true) @RequestHeader String username,
+                                                    @ApiParam(value = "Authorization code from email",
+                                                            required = true) @RequestHeader String minAuth) {
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 

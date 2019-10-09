@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,7 +31,11 @@ public interface UserApi {
     @RequestMapping(value = "/user",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Void> createUser(@ApiParam(value = "Created user object", required = true) @Valid @RequestBody User body);
+    ResponseEntity<Void> createUser(@ApiParam(value = "Created user object", required = true) @Valid @RequestBody User body,
+                                    @ApiParam(value = "Authorization code from email",
+                                            required = true) @RequestHeader String username,
+                                    @ApiParam(value = "Authorization code from email",
+                                            required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags = {})
@@ -39,7 +44,11 @@ public interface UserApi {
     @RequestMapping(value = "/user/createWithArray",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object", required = true) @Valid @RequestBody List<User> body);
+    ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object", required = true) @Valid @RequestBody List<User> body,
+                                                   @ApiParam(value = "Authorization code from email",
+                                                           required = true) @RequestHeader String username,
+                                                   @ApiParam(value = "Authorization code from email",
+                                                           required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Creates list of users with given input file", nickname = "createUsersWithListInput", notes = "", tags = {})
@@ -48,6 +57,9 @@ public interface UserApi {
     @RequestMapping(value = "/user/createFromFile",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Void> createUsersWithListInput();
+    ResponseEntity<Void> createUsersWithListInput(@ApiParam(value = "Authorization code from email",
+            required = true) @RequestHeader String username,
+                                                  @ApiParam(value = "Authorization code from email",
+                                                          required = true) @RequestHeader String minAuth);
 
 }

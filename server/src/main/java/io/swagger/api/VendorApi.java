@@ -15,6 +15,7 @@ import io.swagger.model.Vendor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,7 +38,11 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor",
             produces = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<Vendor> createVendor(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Vendor body);
+    ResponseEntity<Vendor> createVendor(@ApiParam(value = "order placed for purchasing the pet", required = true) @Valid @RequestBody Vendor body,
+                                        @ApiParam(value = "Authorization code from email",
+                                                required = true) @RequestHeader String username,
+                                        @ApiParam(value = "Authorization code from email",
+                                                required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Remove a vendor from the accessible list", nickname = "deleteVendor", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", authorizations = {
@@ -49,7 +54,11 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor/{vendorId}",
             produces = {"application/json"},
             method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId);
+    ResponseEntity<Void> deleteVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String username,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Edit a vendor from the accessible list", nickname = "editVendor", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", authorizations = {
@@ -61,7 +70,11 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor/{vendorId}",
             produces = {"application/json"},
             method = RequestMethod.PUT)
-    ResponseEntity<Vendor> editVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body);
+    ResponseEntity<Vendor> editVendor(@ApiParam(value = "ID of the order that needs to be deleted", required = true) @PathVariable("vendorId") UUID vendorId, @Valid @RequestBody Vendor body,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String username,
+                                      @ApiParam(value = "Authorization code from email",
+                                              required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Returns vendor inventories", nickname = "getAllInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags = {})
@@ -70,7 +83,10 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<ArrayList<Vendor>> getAllInventory();
+    ResponseEntity<ArrayList<Vendor>> getAllInventory(@ApiParam(value = "Authorization code from email",
+            required = true) @RequestHeader String username,
+                                                      @ApiParam(value = "Authorization code from email",
+                                                              required = true) @RequestHeader String minAuth);
 
 
     @ApiOperation(value = "Returns vendor inventory", nickname = "getInventory", notes = "Returns a list of possible vendors", response = Integer.class, responseContainer = "Map", tags = {})
@@ -79,6 +95,10 @@ public interface VendorApi {
     @RequestMapping(value = "/vendor/{vendorId}",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<Vendor> getInventory(@ApiParam(value = "ID of pet that needs to be fetched", required = true) @PathVariable("vendorId") UUID vendorId);
+    ResponseEntity<Vendor> getInventory(@ApiParam(value = "ID of pet that needs to be fetched", required = true) @PathVariable("vendorId") UUID vendorId,
+                                        @ApiParam(value = "Authorization code from email",
+                                                required = true) @RequestHeader String username,
+                                        @ApiParam(value = "Authorization code from email",
+                                                required = true) @RequestHeader String minAuth);
 
 }

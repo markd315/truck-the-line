@@ -3,6 +3,7 @@ package io.swagger.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.swagger.annotations.ApiParam;
+import io.swagger.configuration.Helper;
 import io.swagger.model.User;
 import io.swagger.service.ResourceService;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -28,6 +30,9 @@ public class UserApiController implements UserApi {
 
     @Autowired
     ResourceService service;
+
+    @Autowired
+    Helper helper;
 
     static Random rng = new Random();
 
@@ -44,7 +49,13 @@ public class UserApiController implements UserApi {
     }
 
     public ResponseEntity<Void> createUser(@ApiParam(value = "Created user object", required = true)
-                                           @Valid @RequestBody User body) {
+                                           @Valid @RequestBody User body,
+                                           @ApiParam(value = "Authorization code from email",
+                                                   required = true) @RequestHeader String username,
+                                           @ApiParam(value = "Authorization code from email",
+                                                   required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         body.setMinAuthCode(minpass());
         Mailer.send(body.getEmail(), "Your foodtrucks password for today", "Password is: " + body.getMinAuthCode());
@@ -53,14 +64,25 @@ public class UserApiController implements UserApi {
     }
 
     public ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object",
-            required = true) @Valid @RequestBody List<User> body) {
+            required = true) @Valid @RequestBody List<User> body,
+                                                          @ApiParam(value = "Authorization code from email",
+                                                                  required = true) @RequestHeader String username,
+                                                          @ApiParam(value = "Authorization code from email",
+                                                                  required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         for (User u : body) {
-            createUser(u);
+            createUser(u, username, minAuth);
         }
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> createUsersWithListInput() {
+    public ResponseEntity<Void> createUsersWithListInput(@ApiParam(value = "Authorization code from email",
+            required = true) @RequestHeader String username,
+                                                         @ApiParam(value = "Authorization code from email",
+                                                                 required = true) @RequestHeader String minAuth) {
+        if (!helper.adminOnly(minAuth))
+            return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
@@ -72,7 +94,7 @@ public class UserApiController implements UserApi {
                 tmp.setEmail(tuple.split(" ")[1]);
                 tmp.setMinAuthCode("0");
                 tmp.setUserStatus(0);
-                createUser(tmp);
+                createUser(tmp, username, minAuth);
             }
         } catch (Exception e) {
             e.printStackTrace();
