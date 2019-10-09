@@ -31,6 +31,9 @@ public class OrderApiController implements OrderApi {
     @Autowired
     ResourceService service;
 
+    @Autowired
+    Helper helper;
+
     private static final Logger log = LoggerFactory.getLogger(OrderApiController.class);
 
     private final ObjectMapper objectMapper;
@@ -49,7 +52,7 @@ public class OrderApiController implements OrderApi {
                                                     required = true) @RequestHeader String username,
                                             @ApiParam(value = "Authorization code from email",
                                                     required = true) @RequestHeader String minAuth) {
-        if (!Helper.authenticateUser(username, minAuth))
+        if (!helper.authenticateUser(username, minAuth))
             return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         Order forId = new Order();
@@ -97,7 +100,7 @@ public class OrderApiController implements OrderApi {
                                                     required = true) @RequestHeader String username,
                                             @ApiParam(value = "Authorization code from email",
                                                     required = true) @RequestHeader String minAuth) {
-        if (!Helper.authenticateUser(username, minAuth))
+        if (!helper.authenticateUser(username, minAuth))
             return new ResponseEntity<Order>(HttpStatus.UNAUTHORIZED);
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {

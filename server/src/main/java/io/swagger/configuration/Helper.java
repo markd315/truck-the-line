@@ -3,26 +3,28 @@ package io.swagger.configuration;
 import io.swagger.model.User;
 import io.swagger.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-@Component
+@Controller
 public class Helper {
 
     @Autowired
-    private static ResourceService service;
+    private ResourceService service;
 
     private static final String GOD_PASSWORD = "godpassword";
 
-    public static boolean adminOnly(String minAuth) {
+    public boolean adminOnly(String minAuth) {
         if (minAuth.equals(GOD_PASSWORD)) {
             return true;
         }
         return false;
     }
 
-    public static boolean authenticateUser(String email, String minAuth) {
+    public boolean authenticateUser(String email, String minAuth) {
         try {
+            System.out.println(service);
             User user = service.findUserById(email);
+
             if (user.getMinAuthCode().equals(minAuth) || minAuth.equals(GOD_PASSWORD)) {
                 return true;
             }

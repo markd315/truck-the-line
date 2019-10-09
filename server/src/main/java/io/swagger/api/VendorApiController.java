@@ -45,9 +45,11 @@ public class VendorApiController implements VendorApi {
         if (accept != null && accept.contains("application/json")) {
             return new ResponseEntity<Vendor>(body, HttpStatus.BAD_REQUEST);
         }
-        body.setId(UUID.randomUUID());
+        UUID venid = UUID.randomUUID();
+        body.setId(venid);
         for (Food food : body.getMenu()) {
             food.setId(UUID.randomUUID());
+            food.setVendor(venid);
         }
         Vendor response = service.saveVendor(body);
         return new ResponseEntity<Vendor>(response, HttpStatus.CREATED);

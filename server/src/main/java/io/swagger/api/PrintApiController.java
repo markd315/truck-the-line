@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
+import io.swagger.model.Food;
 import io.swagger.model.Order;
 import io.swagger.service.ResourceService;
 import org.slf4j.Logger;
@@ -44,7 +45,7 @@ public class PrintApiController implements PrintApi {
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
-        //TODO filter by vendor
+        list = vendorFilter(list, vendorId);
         List<Order> printingOrders = new ArrayList<>();
         for (Order o : list) {
             if (o.getStatus().equals(Order.StatusEnum.SENDING_ORDER)) {
@@ -63,7 +64,7 @@ public class PrintApiController implements PrintApi {
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
-        //TODO filter by vendor
+        list = vendorFilter(list, vendorId);
         List<Order> printingOrders = new ArrayList<>();
         for (Order o : list) {
             if (o.getStatus().equals(Order.StatusEnum.SENDING_ORDER)) {
@@ -80,7 +81,7 @@ public class PrintApiController implements PrintApi {
         String accept = request.getHeader("Accept");
         Collection<Order> list = service.findAllOrders();
 
-        //TODO filter by vendor
+        list = vendorFilter(list, vendorId);
         List<Order> printingOrders = new ArrayList<>();
         for (Order o : list) {
             if (o.getStatus().equals(Order.StatusEnum.WAITING_FOR_TRUCK)) {
@@ -90,6 +91,26 @@ public class PrintApiController implements PrintApi {
         printingOrders.sort(Comparator.comparing(Order::getDonationPriority));
         Collections.reverse(printingOrders);
         return new ResponseEntity<List<Order>>(printingOrders, HttpStatus.OK);
+    }
+
+    private Collection<Order> vendorFilter(Collection<Order> list, String vendorId) {
+        if (vendorId == null || vendorId.equals("")) {
+            return list;
+        }
+        List<Order> rm = new ArrayList<>();
+        for (Order o : list) {
+            boolean flag = false;
+            for (Food f : o.getPayload()) {
+                if (f.getVendor().toString().equals(vendorId)) {
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                rm.add(o);
+            }
+        }
+        list.removeAll(rm);
+        return list;
     }
 
 }
